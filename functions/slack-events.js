@@ -2,6 +2,8 @@ const querystring = require('querystring')
 const { appController } = require('../lib/app-controller')
 
 exports.handler = ({ httpMethod, body }) => {
+	const payload = querystring.parse(body)
+
 	// @todo: set headers({ 'X-Slack-No-Retry': 1 }) // See: https://api.slack.com/events-api
 
 	// Guardian: Only allow POST requests
@@ -9,7 +11,7 @@ exports.handler = ({ httpMethod, body }) => {
 		return { statusCode: 405, body: 'Method Not Allowed' }
 	}
 
-	const { token, type, challenge, event_id, bot_id, text, response_url } = querystring.parse(body)
+	const { token, type, challenge, event_id } = payload
 	console.debug(`Slack event: ${event_id}`)
 
 	// Guardian: Slack verification token
@@ -23,18 +25,13 @@ exports.handler = ({ httpMethod, body }) => {
 		return { statusCode: 200, body: challenge }
 	}
 
-	// Ignore empty messages
-	if (!text || !text.trim().length > 0) {
-		return { statusCode: 204, body: 'No Content' }
-	}
-
 	/**
 	 * Hand over to the app controller
 	 *
 	 * Do not await a response, because otherwise it will time out,
 	 * and Slack would keep resending the event.
 	 */
-	appController({ body })
+	appController({ payload })
 
 	// Always respond with OK
 	return { statusCode: 200 }
