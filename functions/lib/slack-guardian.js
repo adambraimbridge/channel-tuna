@@ -1,9 +1,12 @@
-const slackGuardian = ({ httpMethod, payload }) => {
+const querystring = require('querystring')
+
+const slackGuardian = (payload) => {
 	console.log({ ...payload })
 
-	const { token, type, challenge, event_id } = payload
+	const { httpMethod, body } = payload
+	const { token, type, challenge, event_id } = body
 
-	console.debug(`Slack event: ${event_id}`)
+	console.debug(`Slack event ID: ${event_id}`)
 
 	// @todo: set headers({  }) // See: https://api.slack.com/events-api
 
