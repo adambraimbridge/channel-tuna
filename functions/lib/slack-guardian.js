@@ -4,11 +4,9 @@ const slackGuardian = (payload) => {
 	console.log({ ...payload })
 
 	const { httpMethod, body } = payload
-	const { token, type, challenge, event_id } = body
+	const { token, type, challenge, event_id } = querystring.parse(body)
 
 	console.debug(`Slack event ID: ${event_id}`)
-
-	// @todo: set headers({  }) // See: https://api.slack.com/events-api
 
 	// Guardian: Only allow POST requests
 	if (httpMethod !== 'POST') {
@@ -47,6 +45,7 @@ const slackGuardian = (payload) => {
 
 	return {
 		isValid: true,
+		...querystring.parse(body),
 	}
 }
 

@@ -18,7 +18,7 @@ exports.handler = (payload) => {
 	 * Do not await a response, because otherwise it will time out,
 	 * and Slack would keep resending the event.
 	 */
-	appController({ payload })
+	appController({ payload: checkedByGuardian })
 
 	// Always respond with OK
 	return { statusCode: 200 }
