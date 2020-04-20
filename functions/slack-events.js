@@ -1,5 +1,5 @@
 const querystring = require('querystring')
-const { appController } = require('../../lib/app-controller')
+const { appController } = require('../lib/app-controller')
 
 exports.handler = ({ httpMethod, body }) => {
 	// @todo: set headers({ 'X-Slack-No-Retry': 1 }) // See: https://api.slack.com/events-api
