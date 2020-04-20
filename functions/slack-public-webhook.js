@@ -4,7 +4,7 @@ const { appController } = require('./lib/app-controller')
 exports.handler = (payload) => {
 	const checkedByGuardian = slackGuardian(payload)
 	if (!checkedByGuardian.isValid || !!checkedByGuardian.body) {
-		const { statusCode, body, headers = {} } = checkedByGuardian
+		const { statusCode, body, headers } = checkedByGuardian
 		return {
 			statusCode,
 			body,
@@ -21,5 +21,8 @@ exports.handler = (payload) => {
 	appController({ payload: checkedByGuardian })
 
 	// Always respond with OK
-	return { statusCode: 200 }
+	return {
+		statusCode: 200,
+		body: 'ok',
+	}
 }
