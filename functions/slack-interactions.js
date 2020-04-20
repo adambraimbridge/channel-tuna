@@ -1,5 +1,5 @@
-const { slackGuardian } = require('../lib/slack-guardian')
-const { appController } = require('../lib/app-controller')
+const { slackGuardian } = require('./lib/slack-guardian')
+const { appController } = require('./lib/app-controller')
 
 exports.handler = ({ httpMethod, body }) => {
 	const payload = querystring.parse(body)
