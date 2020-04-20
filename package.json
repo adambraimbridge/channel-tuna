@@ -1,0 +1,25 @@
+{
+  "name": "channel-tuna",
+  "version": "1.0.0",
+  "description": "A Slack bot to list all Slack channels and sort by topic tags.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adambraimbridge/channel-tuna.git"
+  },
+  "keywords": [
+    "slack",
+    "slackbot",
+    "channel",
+    "tuna"
+  ],
+  "author": "Adam Braimbridge <adam@braimbridge.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adambraimbridge/channel-tuna/issues"
+  },
+  "homepage": "https://github.com/adambraimbridge/channel-tuna#readme"
+}
