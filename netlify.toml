@@ -1,4 +1,3 @@
 [build]
-  command = "yarn deploy"
   functions = "functions"
   publish = "out"
