@@ -5,7 +5,7 @@ exports.handler = ({ httpMethod, body }) => {
 	const payload = querystring.parse(body)
 	const checkedByGuardian = slackGuardian({ httpMethod, payload })
 	if (!checkedByGuardian.isValid || !!checkedByGuardian.body) {
-		const { statusCode, body, headers = {} } = checkedByGuardian
+		const { statusCode, body, headers } = checkedByGuardian
 		return {
 			statusCode,
 			body,
