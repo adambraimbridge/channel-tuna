@@ -1,10 +1,8 @@
 const { slackGuardian } = require('./lib/slack-guardian')
 const { appController } = require('./lib/app-controller')
 
-exports.handler = (payload) => {
-	console.log({ ...payload })
-
-	const checkedByGuardian = slackGuardian(payload)
+exports.handler = (request) => {
+	const checkedByGuardian = slackGuardian(request)
 	if (!checkedByGuardian.isValid || !!checkedByGuardian.body) {
 		const { statusCode, body, headers } = checkedByGuardian
 		return {

@@ -1,13 +1,19 @@
-const slackGuardian = (payload) => {
-	const { httpMethod, body } = payload
+const querystring = require('querystring')
 
-	let data = {}
+const slackGuardian = (request) => {
+	const { httpMethod, body } = request
+	// const payload = querystring.parse(body)
+
+	let payload = {}
 	try {
-		data = JSON.parse(body)
+		payload = querystring.parse(body)
 	} catch (error) {
 		console.error(error.message)
 	}
-	const { token, type, challenge, event_id } = data
+
+	console.log({ payload })
+
+	const { token, type, challenge, event_id } = payload
 
 	console.debug(`Slack event ID: ${event_id}`)
 
@@ -48,7 +54,7 @@ const slackGuardian = (payload) => {
 
 	return {
 		isValid: true,
-		...data,
+		...payload,
 	}
 }
 
