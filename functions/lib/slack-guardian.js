@@ -2,18 +2,8 @@ const querystring = require('querystring')
 
 const slackGuardian = (request) => {
 	const { httpMethod, body } = request
-	// const payload = querystring.parse(body)
-
-	let payload = {}
-	try {
-		payload = querystring.parse(body)
-	} catch (error) {
-		console.error(error.message)
-	}
-
-	console.log({ payload })
-
-	const { token, type, challenge, event_id } = payload
+	const { payload } = querystring.parse(body)
+	const { token, type, challenge, event_id } = JSON.parse(payload)
 
 	console.debug(`Slack event ID: ${event_id}`)
 
