@@ -5,6 +5,9 @@ const slackGuardian = (request) => {
 	const { payload } = querystring.parse(body)
 	const { token, type, challenge, event_id } = JSON.parse(payload)
 
+	console.log(payload)
+	console.log(JSON.parse(payload))
+
 	console.debug(`Slack event ID: ${event_id}`)
 
 	// Guardian: Only allow POST requests
