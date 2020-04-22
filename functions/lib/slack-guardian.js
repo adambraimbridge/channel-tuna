@@ -7,7 +7,7 @@ const slackGuardian = (request) => {
 	const { payload: payloadString } = querystring.parse(body)
 	let payload = false
 	try {
-		JSON.parse(payloadString)
+		payload = JSON.parse(payloadString)
 	} catch (error) {
 		console.log(error.messages)
 	}
