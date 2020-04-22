@@ -4,10 +4,11 @@ const slackGuardian = (request) => {
 	console.log({ ...request })
 
 	const { httpMethod, body } = request
-	const { payload: payloadString } = querystring.parse(body)
+	const bodyString = querystring.parse(body)
 	let payload = false
 	try {
-		payload = JSON.parse(payloadString)
+		const data = JSON.parse(bodyString)
+		payload = data.payload || data
 	} catch (error) {
 		console.log(error.messages)
 	}
@@ -27,6 +28,7 @@ const slackGuardian = (request) => {
 	}
 
 	// Guardian: Slack verification token
+	const { token } = payload
 	const { SLACK_VERIFICATION_TOKEN } = process.env
 	if (!token || token !== SLACK_VERIFICATION_TOKEN) {
 		return {
