@@ -1,16 +1,20 @@
 const querystring = require('querystring')
 
 const slackGuardian = (request) => {
-	console.log({ ...request })
+	// console.log({ ...request })
 
 	const { httpMethod, body } = request
 	const bodyString = querystring.parse(body)
 	let payload = false
 	try {
 		const data = JSON.parse(bodyString)
+
+		console.debug({ data })
+
 		payload = data.payload || data
 	} catch (error) {
 		console.log(error.messages)
+		return false
 	}
 
 	console.debug({ ...payload })
