@@ -2,24 +2,7 @@ const querystring = require('querystring')
 
 const slackGuardian = (request) => {
 	// console.log({ ...request })
-
 	const { httpMethod, body } = request
-	console.debug({ body })
-
-	const bodyString = querystring.parse(body)
-	let payload = false
-	try {
-		const data = JSON.parse(bodyString)
-
-		console.debug({ data })
-
-		payload = data.payload || data
-	} catch (error) {
-		console.log(error)
-		return false
-	}
-
-	console.debug({ ...payload })
 
 	// Guardian: Only allow POST requests
 	if (httpMethod !== 'POST') {
@@ -32,6 +15,12 @@ const slackGuardian = (request) => {
 			},
 		}
 	}
+
+	// Payload is different depending on what Slack sends
+	const data = querystring.parse(body)
+	const payload = data.payload ? JSON.parse(data.payload) : data
+
+	console.debug({ ...payload })
 
 	// Guardian: Slack verification token
 	const { token } = payload
