@@ -1,14 +1,18 @@
 const querystring = require('querystring')
 
 const slackGuardian = (request) => {
+	console.log({ ...request })
+
 	const { httpMethod, body } = request
-	const { payload } = querystring.parse(body)
-	const { token, type, challenge, event_id } = JSON.parse(payload)
+	const { payloadString: payload } = querystring.parse(body)
+	let payload = false
+	try {
+		JSON.parse(payloadString)
+	} catch (error) {
+		console.log(error.messages)
+	}
 
-	console.log(payload)
-	console.log(JSON.parse(payload))
-
-	console.debug(`Slack event ID: ${event_id}`)
+	console.debug({ ...payload })
 
 	// Guardian: Only allow POST requests
 	if (httpMethod !== 'POST') {
