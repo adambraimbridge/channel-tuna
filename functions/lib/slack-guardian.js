@@ -4,7 +4,7 @@ const slackGuardian = (request) => {
 	console.log({ ...request })
 
 	const { httpMethod, body } = request
-	const { payloadString: payload } = querystring.parse(body)
+	const { payload: payloadString } = querystring.parse(body)
 	let payload = false
 	try {
 		JSON.parse(payloadString)
