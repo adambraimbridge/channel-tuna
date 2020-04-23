@@ -27,7 +27,7 @@ const getModalJson = ({ view_id, callback_id, channels }) => {
 		]
 	})
 
-	return {
+	const json = {
 		view_id,
 		view: {
 			callback_id,
@@ -49,6 +49,9 @@ const getModalJson = ({ view_id, callback_id, channels }) => {
 			],
 		},
 	}
+
+	console.log({ json })
+	return json
 }
 
 const listAllSlackChannels = async ({ view_id, callback_id }) => {
