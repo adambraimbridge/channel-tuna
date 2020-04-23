@@ -4,6 +4,7 @@ const slackClient = new WebClient(process.env.BOT_USER_ACCESS_TOKEN)
 const getSlackChannels = async () => {
 	const response = await slackClient.conversations //
 		.list({
+			token: process.env.BOT_USER_ACCESS_TOKEN,
 			types: 'public_channel',
 			exclude_archived: true,
 			limit: 1000,
