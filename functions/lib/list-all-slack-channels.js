@@ -27,6 +27,8 @@ const getModalJson = ({ view_id, callback_id, channels }) => {
 		]
 	})
 
+	console.log({ fields })
+
 	const json = {
 		view_id,
 		view: {
@@ -50,7 +52,6 @@ const getModalJson = ({ view_id, callback_id, channels }) => {
 		},
 	}
 
-	console.log({ fileds })
 	return json
 }
 
