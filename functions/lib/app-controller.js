@@ -7,7 +7,11 @@ const handleCallback = async ({ trigger_id, callback_id }) => {
 	if (callback_id === 'list-all-slack-channels') {
 		const response = await spawnSlackModal({ trigger_id, callback_id }).catch(console.error)
 		console.log({ ...response })
-		// listAllSlackChannels
+		const { id } = response.view
+		listAllSlackChannels({
+			view_id: id,
+			callback_id,
+		})
 	}
 }
 

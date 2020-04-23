@@ -2,10 +2,10 @@ const { WebClient } = require('@slack/web-api')
 const slackClient = new WebClient(process.env.BOT_USER_ACCESS_TOKEN)
 
 const getModalJson = ({ trigger_id, callback_id }) => ({
-	trigger_id: trigger_id,
+	trigger_id,
 	view: {
-		type: 'modal',
 		callback_id,
+		type: 'modal',
 		title: {
 			type: 'plain_text',
 			text: 'Channel Tuna',
