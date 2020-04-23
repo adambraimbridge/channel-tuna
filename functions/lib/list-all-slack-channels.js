@@ -50,7 +50,7 @@ const getModalJson = ({ view_id, callback_id, channels }) => {
 		},
 	}
 
-	console.log({ json })
+	console.log({ fileds })
 	return json
 }
 
