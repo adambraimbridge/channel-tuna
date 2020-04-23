@@ -6,6 +6,8 @@ const handleCallback = async ({ trigger_id, callback_id }) => {
 	// @todo Abstract this to handle dynamic callback IDs.
 	if (callback_id === 'list-all-slack-channels') {
 		const response = await spawnSlackModal({ trigger_id, callback_id }).catch(console.error)
+		console.log({ ...response })
+		// listAllSlackChannels
 	}
 }
 
