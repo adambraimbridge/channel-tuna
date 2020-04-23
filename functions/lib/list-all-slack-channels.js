@@ -15,6 +15,7 @@ const getSlackChannels = async () => {
 
 const getModalJson = ({ view_id, callback_id, channels }) => {
 	const fields = channels.reduce((accumulator, channel) => {
+		const text = channel.purpose.value.length > 0 ? channel.purpose.value.length : 'No description here.'
 		accumulator.push(
 			{
 				type: 'mrkdwn',
@@ -22,15 +23,13 @@ const getModalJson = ({ view_id, callback_id, channels }) => {
 			},
 			{
 				type: 'mrkdwn',
-				text: channel.purpose.value,
+				text,
 			}
 		)
 		return accumulator
 	}, [])
 
-	console.log({ fields })
-
-	const json = {
+	return {
 		view_id,
 		view: {
 			callback_id,
@@ -52,8 +51,6 @@ const getModalJson = ({ view_id, callback_id, channels }) => {
 			],
 		},
 	}
-
-	return json
 }
 
 const listAllSlackChannels = async ({ view_id, callback_id }) => {
