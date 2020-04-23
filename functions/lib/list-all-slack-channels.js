@@ -19,7 +19,7 @@ const getModalJson = ({ view_id, callback_id, channels }) => {
 		accumulator.push(
 			{
 				type: 'mrkdwn',
-				text: channel.name_normalized,
+				text: `#${channel.name_normalized}`,
 			},
 			{
 				type: 'mrkdwn',
