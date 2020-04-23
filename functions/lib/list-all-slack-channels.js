@@ -13,15 +13,15 @@ const getSlackChannels = async () => {
 }
 
 const getModalJson = ({ view_id, callback_id, channels }) => {
-	const blocks = channels.map((channel) => {
+	const fields = channels.map((channel) => {
 		return [
 			{
-				type: 'section',
-				block_id: 'slack-channel-list',
-				text: {
-					type: 'mrkdwn',
-					text: `${channel.name_normalized} — ${channel.purpose.value}`,
-				},
+				type: 'mrkdwn',
+				text: channel.name_normalized,
+			},
+			{
+				type: 'mrkdwn',
+				text: channel.purpose.value,
 			},
 		]
 	})
@@ -33,9 +33,19 @@ const getModalJson = ({ view_id, callback_id, channels }) => {
 			type: 'modal',
 			title: {
 				type: 'plain_text',
-				text: `Channel Tuna: All Slack channels`,
+				text: `Channel Tuna`,
 			},
-			blocks,
+			blocks: [
+				{
+					type: 'section',
+					block_id: 'slack-channel-list',
+					text: {
+						type: 'mrkdwn',
+						text: 'All Slack channels',
+					},
+					fields,
+				},
+			],
 		},
 	}
 }
