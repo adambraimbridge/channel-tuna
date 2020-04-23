@@ -16,7 +16,7 @@ const getSlackChannels = async () => {
 const getModalJson = ({ view_id, callback_id, channels }) => {
 	const fields = channels //
 		.sort((a, b) => {
-			return a.channel.name_normalized > b.channel.name_normalized
+			return a.channel.name_normalized.toUpperCase() < b.channel.name_normalized.toUpperCase() ? -1 : 1
 		})
 		.reduce((accumulator, channel) => {
 			const text = channel.purpose.value.length > 0 ? channel.purpose.value : 'No description here.'
