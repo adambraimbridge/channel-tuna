@@ -14,20 +14,24 @@ const getSlackChannels = async () => {
 }
 
 const getModalJson = ({ view_id, callback_id, channels }) => {
-	const fields = channels.reduce((accumulator, channel) => {
-		const text = channel.purpose.value.length > 0 ? channel.purpose.value : 'No description here.'
-		accumulator.push(
-			{
-				type: 'mrkdwn',
-				text: `#${channel.name_normalized}`,
-			},
-			{
-				type: 'mrkdwn',
-				text: `${text}`,
-			}
-		)
-		return accumulator
-	}, [])
+	const fields = channels //
+		.sort((a, b) => {
+			return a.channel.name_normalized > b.channel.name_normalized
+		})
+		.reduce((accumulator, channel) => {
+			const text = channel.purpose.value.length > 0 ? channel.purpose.value : 'No description here.'
+			accumulator.push(
+				{
+					type: 'mrkdwn',
+					text: `#${channel.name_normalized}`,
+				},
+				{
+					type: 'mrkdwn',
+					text: `${text}`,
+				}
+			)
+			return accumulator
+		}, [])
 
 	return {
 		view_id,
