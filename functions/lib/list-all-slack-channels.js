@@ -14,8 +14,8 @@ const getSlackChannels = async () => {
 }
 
 const getModalJson = ({ view_id, callback_id, channels }) => {
-	const fields = channels.map((channel) => {
-		return [
+	const fields = channels.reduce((accumulator, channel) => {
+		accumulator.push(
 			{
 				type: 'mrkdwn',
 				text: channel.name_normalized,
@@ -23,9 +23,10 @@ const getModalJson = ({ view_id, callback_id, channels }) => {
 			{
 				type: 'mrkdwn',
 				text: channel.purpose.value,
-			},
-		]
-	})
+			}
+		)
+		return accumulator
+	}, [])
 
 	console.log({ fields })
 
