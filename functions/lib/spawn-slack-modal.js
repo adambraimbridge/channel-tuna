@@ -1,5 +1,5 @@
 const { WebClient } = require('@slack/web-api')
-const web = new WebClient(process.env.SLACK_AUTHENTICATION_TOKEN)
+const web = new WebClient(process.env.BOT_USER_ACCESS_TOKEN)
 
 const json = {
 	view: {
