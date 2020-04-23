@@ -1,40 +1,23 @@
-const axios = require('axios')
+const { spawnSlackModal } = require('./spawn-slack-modal')
+const { listAllSlackChannels } = require('./list-all-slack-channels')
+
+const handleCallback = async ({ type, trigger_id, callback_id }) => {
+	// Happy path.
+	// @todo Abstract this to handle dynamic callback IDs.
+	if (callback_id === 'list-all-slack-channels') {
+		const response = await spawnSlackModal({ trigger_id, callback_id }).catch(console.error)
+	}
+}
 
 /**
- * Because this is a template, this controller actually just parrots back
- * whatever text was submitted. Replace this with your controller code.
- *
  * @param { payload } — A payload of Slack event data
  */
 const appController = async ({ payload }) => {
 	console.log('appController')
 
-	// Ignore empty messages
-	const { text } = payload
-	if (!text || !text.trim().length > 0) {
-		return { statusCode: 204, body: 'No Content' }
-	}
-
-	try {
-		await axios.post(
-			response_url,
-			{
-				response_type: 'in_channel',
-				text,
-			},
-			{
-				headers: { 'content-type': 'application/json' },
-			}
-		)
-		return {
-			statusCode: 200,
-		}
-	} catch (error) {
-		console.error(error)
-		return {
-			statusCode: 422, // Unprocessable Entity
-			body: error.message,
-		}
+	const { type, trigger_id, callback_id } = payload
+	if (!!type && !!trigger_id && !!callback_id) {
+		await handleCallback({ payload })
 	}
 }
 
