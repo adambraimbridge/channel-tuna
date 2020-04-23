@@ -7,6 +7,8 @@ const axios = require('axios')
  * @param { payload } — A payload of Slack event data
  */
 const appController = async ({ payload }) => {
+	console.log('appController')
+
 	// Ignore empty messages
 	const { text } = payload
 	if (!text || !text.trim().length > 0) {

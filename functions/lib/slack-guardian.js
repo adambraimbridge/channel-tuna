@@ -1,7 +1,6 @@
 const querystring = require('querystring')
 
 const slackGuardian = (request) => {
-	// console.log({ ...request })
 	const { httpMethod, body } = request
 
 	// Guardian: Only allow POST requests
