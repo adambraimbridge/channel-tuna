@@ -19,7 +19,7 @@ const slackGuardian = (request) => {
 	const data = querystring.parse(body)
 	const payload = data.payload ? JSON.parse(data.payload) : data
 
-	console.debug({ ...payload })
+	// console.debug({ ...payload })
 
 	// Guardian: Slack verification token
 	const { token } = payload

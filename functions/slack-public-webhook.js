@@ -18,6 +18,7 @@ exports.handler = (request) => {
 	 * Do not await a response, because otherwise it will time out,
 	 * and Slack would keep resending the event.
 	 */
+	console.log('Hand over to the app controller ...')
 	appController({ payload: checkedByGuardian })
 
 	// Always respond with OK

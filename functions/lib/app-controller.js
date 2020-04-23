@@ -13,7 +13,7 @@ const handleCallback = async ({ type, trigger_id, callback_id }) => {
  * @param { payload } — A payload of Slack event data
  */
 const appController = async ({ payload }) => {
-	console.log('appController')
+	console.log({ ...payload })
 
 	const { type, trigger_id, callback_id } = payload
 	if (!!type && !!trigger_id && !!callback_id) {
