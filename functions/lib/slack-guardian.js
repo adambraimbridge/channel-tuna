@@ -34,7 +34,8 @@ const slackGuardian = (request) => {
 	}
 
 	// Handle Slack challenges. See: https://api.slack.com/events/url_verification
-	if (type && type === 'url_verification' && !!challenge) {
+	const { type, challenge } = payload
+	if (type === 'url_verification' && !!challenge) {
 		return {
 			isValid: true,
 			statusCode: 200,
